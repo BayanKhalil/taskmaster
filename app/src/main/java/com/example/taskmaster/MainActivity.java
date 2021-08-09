@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String userName = preferences.getString("userName","Go to Settings to set your username");
         TextView title  = findViewById(R.id.homePageTitle);
-        title.setText(userName+"' Tasks");
+        title.setText(userName+"'s Tasks");
 
     }
 
@@ -31,6 +31,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button addButton = findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addButton=new Intent(MainActivity.this,AddTask.class);
+                MainActivity.this.startActivity(addButton);
+            }
+        });
+
+        Button allTasksButton = findViewById(R.id.allTaskButton);
+        allTasksButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent allTasksButton=new Intent(MainActivity.this,AllTasks.class);
+                MainActivity.this.startActivity(allTasksButton);
+            }
+        });
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        Button task1 = findViewById(R.id.button1);
+        task1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String title = task1.getText().toString();
+                Intent detailsPage = new Intent(MainActivity.this, TaskDetails.class);
+                detailsPage.putExtra("titleOfTasks",title);
+                startActivity(detailsPage);
+
+            }
+        });
 
 
         Button task2 = findViewById(R.id.button2);
@@ -45,19 +75,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-        Button task1 = findViewById(R.id.button1);
-        task1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String title = task1.getText().toString();
-                Intent detailsPage = new Intent(MainActivity.this, TaskDetails.class);
-                detailsPage.putExtra("titleOfTasks",title);
-                startActivity(detailsPage);
-
-            }
-        });
 
         Button task3=findViewById(R.id.detailButton);
         task3.setOnClickListener(new View.OnClickListener() {
