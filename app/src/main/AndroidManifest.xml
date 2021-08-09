@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.taskmaster">
 
     <application
@@ -9,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Taskmaster">
-        <activity android:name=".AllTasks"></activity>
+        <activity android:name=".settings"></activity>
+        <activity android:name=".TaskDetails" />
+        <activity android:name=".AllTasks" />
         <activity
             android:name=".AddTask"
             android:label="@string/title_activity_add_task"
