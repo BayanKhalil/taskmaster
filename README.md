@@ -7,13 +7,19 @@
 
 
 
+ <img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/Screenshot_20210808-224552.jpg" alt="1" width="200"/>
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/Screenshot_20210808-224559.jpg" alt="2" width="200"/>
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/Screenshot_20210808-224607.jpg" alt="3" width="200"/>
  
- ![1](https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/Screenshot_20210808-224552.jpg)
- 
- ![2](https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/Screenshot_20210808-224559.jpg)
- 
- ![3](https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/Screenshot_20210808-224607.jpg)
 
 ### lab27
 modified Home Page to contain three different buttons with hardcoded task titles. When a user taps one of the titles, it  go to the Task Detail page, and the title at the top of the page match the task title that was tapped on the previous page.
 The homepage also contain a button to visit the Settings page, and once the user has entered their username, it display “{username}’s tasks” above the three task buttons
+
+ <img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/home27.jpg" alt="1" width="200"/>
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/details27.jpg" alt="2" width="200"/>
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/settings27.jpg" alt="3" width="200"/>
