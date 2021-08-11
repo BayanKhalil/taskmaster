@@ -4,13 +4,14 @@
     package="com.example.taskmaster">
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Taskmaster">
-        <activity android:name=".settings"></activity>
+        <activity android:name=".settings" />
         <activity android:name=".TaskDetails" />
         <activity android:name=".AllTasks" />
         <activity

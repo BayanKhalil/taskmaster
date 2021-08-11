@@ -1,20 +1,12 @@
 package com.example.taskmaster;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.ContextMenu;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.taskmaster.databinding.ActivityAddTaskBinding;
 
 public class AddTask extends AppCompatActivity {
 
