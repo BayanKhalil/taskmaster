@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,13 @@ public class MainActivity extends AppCompatActivity {
     public static final String title = "title";
     public static final String body = "body";
     public static final String state = "state";
+    private static final String TASK_LIST ="task-list" ;
 
     private List<Task> taskList;
     private TaskAdapter adapter;
 
+    private TaskDao taskDao;
+    private AppDatabase database;
 
 
     @SuppressLint("SetTextI18n")
@@ -48,14 +52,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,TASK_LIST)
+                .allowMainThreadQueries().build();
+        taskDao = database.taskDao();
+        taskList = taskDao.findAll();
+
         RecyclerView taskRecyclerView = findViewById(R.id.tasksList);
-        taskList = new ArrayList<>();
-        taskList.add(new Task("Task 1", "study", "new"));
-        taskList.add(new Task("Task 2", "eat", "assigned"));
-        taskList.add(new Task("Task 3", "play", "in progress"));
-        taskList.add(new Task("Task 4", "code", "complete"));
-        taskList.add(new Task("Task 5", "watch tv", "new"));
-        taskList.add(new Task("Task 6", "clean my room", "assigned"));
+//        taskList = new ArrayList<>();
+//        taskList.add(new Task("Task 1", "study", "new"));
+//        taskList.add(new Task("Task 2", "eat", "assigned"));
+//        taskList.add(new Task("Task 3", "play", "in progress"));
+//        taskList.add(new Task("Task 4", "code", "complete"));
+//        taskList.add(new Task("Task 5", "watch tv", "new"));
+//        taskList.add(new Task("Task 6", "clean my room", "assigned"));
 
         adapter = new TaskAdapter(taskList, new TaskAdapter.OnTaskItemClickListener() {
 

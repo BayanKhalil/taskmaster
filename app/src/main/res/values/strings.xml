@@ -30,4 +30,12 @@
     <string name="add_task">ADD TASK</string>
     <string name="all_tasks">ALL TASKS</string>
 
+
+    <string-array name="stateArray">
+        <item>New</item>
+        <item>Assigned</item>
+        <item>In Progress</item>
+        <item>Completed</item>
+    </string-array>
+
 </resources>

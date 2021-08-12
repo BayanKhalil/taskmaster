@@ -33,3 +33,10 @@ Refactor homepage which use a RecyclerView for displaying List of Task data.
 <img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/RecycleTasks.jpg" alt="2" width="200"/>
 
 <img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/taskdetails28.jpg" alt="3" width="200"/>
+
+
+
+###lab29
+
+Modify  Add Task form to save the data entered in as a Task in local database and
+Refactor homepage’s RecyclerView to display all Task entities in database also displayed on the detail page

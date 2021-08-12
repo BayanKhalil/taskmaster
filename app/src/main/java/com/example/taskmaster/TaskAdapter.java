@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TaskAdapter  extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
-    private static final String TAG = "FoodAdapter";
+
     private final List<Task> tasks;
     private OnTaskItemClickListener listener;
 
@@ -39,7 +39,7 @@ public class TaskAdapter  extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
         holder.title.setText(item.getTitle());
         holder.body.setText(item.getBody());
-        holder.status.setText(item.getState());
+        holder.state.setText(item.getState());
     }
 
     @Override
@@ -51,14 +51,14 @@ public class TaskAdapter  extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
         private TextView title;
         private TextView body;
-        private TextView status;
+        private TextView state;
 
         ViewHolder(@NonNull View itemView, OnTaskItemClickListener listener) {
             super(itemView);
 
             title = itemView.findViewById(R.id.task_title);
             body = itemView.findViewById(R.id.task_body);
-            status = itemView.findViewById(R.id.task_state);
+            state = itemView.findViewById(R.id.task_state);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
