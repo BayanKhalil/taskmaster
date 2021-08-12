@@ -28,6 +28,11 @@ The homepage also contain a button to visit the Settings page, and once the user
 ### lab28
 Refactor homepage which use a RecyclerView for displaying List of Task data.
 
+ <img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/home28.jpg" alt="1" width="200"/>
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/RecycleTasks.jpg" alt="2" width="200"/>
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/taskdetails28.jpg" alt="3" width="200"/>
 
 
 
@@ -35,4 +40,3 @@ Refactor homepage which use a RecyclerView for displaying List of Task data.
 
 Modify  Add Task form to save the data entered in as a Task in local database and
 Refactor homepage’s RecyclerView to display all Task entities in database also displayed on the detail page
-
