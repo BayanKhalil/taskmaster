@@ -27,3 +27,12 @@ The homepage also contain a button to visit the Settings page, and once the user
 
 ### lab28
 Refactor homepage which use a RecyclerView for displaying List of Task data.
+
+
+
+
+###lab29
+
+Modify  Add Task form to save the data entered in as a Task in local database and
+Refactor homepage’s RecyclerView to display all Task entities in database also displayed on the detail page
+
