@@ -25,7 +25,7 @@ public class addTaskTest {
 
 
     @Test
-    public void testButton_AddTask_Performance() {
+    public void addTask() {
         onView(withId(R.id.addButton)).perform(click());
         onView(withId(R.id.editTextDescription)).check(matches(isDisplayed()));
     }
