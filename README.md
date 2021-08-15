@@ -31,8 +31,14 @@ Refactor homepage which use a RecyclerView for displaying List of Task data.
 
 
 
-###lab29
+### lab29
 
 Modify  Add Task form to save the data entered in as a Task in local database and
 Refactor homepage’s RecyclerView to display all Task entities in database also displayed on the detail page
 
+
+
+
+### lab31
+
+Add Espresso to the application, and use it to test basic functionality of the main components of the application
