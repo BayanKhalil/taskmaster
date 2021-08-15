@@ -46,3 +46,7 @@ Refactor homepage’s RecyclerView to display all Task entities in database also
 <img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/AddTask29.jpg" alt="2" width="200"/>
 
 <img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/details29.jpg" alt="3" width="200"/>
+
+### lab31
+
+Add Espresso to the application, and use it to test basic functionality of the main components of the application
