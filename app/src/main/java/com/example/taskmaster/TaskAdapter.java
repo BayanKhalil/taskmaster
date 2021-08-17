@@ -13,16 +13,17 @@ import java.util.List;
 public class TaskAdapter  extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
 
-    private final List<Task> tasks;
+//    private final List<Task> tasks;
+    private final List<com.amplifyframework.datastore.generated.model.Task> amplifyTasks;
     private OnTaskItemClickListener listener;
 
     public interface OnTaskItemClickListener {
         void onItemClicked(int position);
-        void onDeleteItem(int position);
+
     }
 
-    public TaskAdapter(List<Task> tasks, OnTaskItemClickListener listener) {
-        this.tasks = tasks;
+    public TaskAdapter(List<com.amplifyframework.datastore.generated.model.Task> amplifyTasks, OnTaskItemClickListener listener) {
+        this.amplifyTasks = amplifyTasks;
         this.listener = listener;
     }
 
@@ -35,16 +36,17 @@ public class TaskAdapter  extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull TaskAdapter.ViewHolder holder, int position) {
-        Task item = tasks.get(position);
+//        Task item = tasks.get(position);
+        com.amplifyframework.datastore.generated.model.Task amplifyItem = amplifyTasks.get(position);
 
-        holder.title.setText(item.getTitle());
-        holder.body.setText(item.getBody());
-        holder.state.setText(item.getState());
+        holder.title.setText(amplifyItem.getTitle());
+        holder.body.setText(amplifyItem.getBody());
+        holder.state.setText(amplifyItem.getState());
     }
 
     @Override
     public int getItemCount() {
-        return tasks.size();
+        return amplifyTasks.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

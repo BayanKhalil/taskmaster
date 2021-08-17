@@ -5,6 +5,8 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 
+
+
 @Entity
 public class Task {
 
@@ -26,6 +28,7 @@ public class Task {
         this.body = body;
         this.state = state;
     }
+
 
     public long getId() {
         return id;
