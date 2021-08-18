@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.View;
 
 
+import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -37,7 +38,9 @@ public class taskNameTest {
 
     onView(withId(R.id.tasksList)).perform(actionOnItemAtPosition(0, click()));
 
-    onView(withText("Clean")).check(matches(isDisplayed()));
+        Espresso.pressBack();
+        onView(withId(R.id.tasksList)).check(matches(isDisplayed()));
+        onView(withText("Fg")).check(matches(isDisplayed()));
 }
 
 

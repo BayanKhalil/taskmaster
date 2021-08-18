@@ -34,7 +34,14 @@ public class Task {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getTitle() {
+        return title;
+    }
+    public String setTitle() {
         return title;
     }
 
@@ -44,9 +51,5 @@ public class Task {
 
     public String getState() {
         return state;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 }

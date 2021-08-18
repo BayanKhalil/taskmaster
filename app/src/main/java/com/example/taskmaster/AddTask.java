@@ -37,11 +37,6 @@ public class AddTask extends AppCompatActivity {
 
 
 
-        database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, TASK_LIST)
-                .allowMainThreadQueries().build();
-        taskDao = database.taskDao();
-
-
 
             Spinner spinner = findViewById(R.id.spinner);
             // Create an ArrayAdapter using the string array and a default spinner layout
@@ -51,6 +46,7 @@ public class AddTask extends AppCompatActivity {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             // Apply the adapter to the spinner
             spinner.setAdapter(adapter);
+
 
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -72,6 +68,7 @@ public class AddTask extends AppCompatActivity {
         InAddTAsk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 EditText inputTitle = findViewById(R.id.editText);
                 EditText inputDescription = findViewById(R.id.editTextDescription);
 
@@ -80,42 +77,15 @@ public class AddTask extends AppCompatActivity {
                 String description = inputDescription.getText().toString();
                 String taskStatus = spinnerState;
 
-                // save data
-                Task task = new Task(title, description,taskStatus);
-//                taskDao.insertOne(task);
 
 
-
-                try {
-                    Amplify.addPlugin(new AWSDataStorePlugin());
-                    Amplify.configure(getApplicationContext());
-
-                    Log.i("Tutorial", "Initialized Amplify");
-                } catch (AmplifyException e) {
-                    Log.e("Tutorial", "Could not initialize Amplify", e);
-                }
-                try {
-                    // Add these lines to add the AWSApiPlugin plugins
-                    Amplify.addPlugin(new AWSApiPlugin());
-                    Amplify.configure(getBaseContext());
-
-                    Log.i("MyAmplifyApp", "Initialized Amplify");
-                } catch (AmplifyException error) {
-                    Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
-                }
-
-                com.amplifyframework.datastore.generated.model.Task amplifyTask = com.amplifyframework.datastore.generated.model.Task.builder().title(title).id("1").state(taskStatus).body(description).build();
-
-
-                Amplify.API.mutate(ModelMutation.create(amplifyTask),
-                        response -> {
-                            Log.i("MyAmplifyApp", "Todo with id: " + response.getData().getId());
-                            taskDao.insertOne(task);
-                        },
-                        error -> Log.e("MyAmplifyApp", "Create failed", error)
-                );
+              MainActivity.saveDataToAmplify(title, description, taskStatus);
                 Toast.makeText(getApplicationContext(), "Task Added", Toast.LENGTH_SHORT).show();
+
+
+
             }
+
         });
 
     }
