@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
-
+ import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String state = "state";
 
 
-    private List<com.amplifyframework.datastore.generated.model.Task> amplifyTaskList;
+
     private List<Task> taskList;
     private TaskAdapter adapter;
 
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         TextView title = findViewById(R.id.homePageTitle);
         title.setText(userName + "'s Tasks");
 
-
+        amplifyData();
 
 
     }
@@ -73,120 +73,33 @@ public class MainActivity extends AppCompatActivity {
             Log.e("Tutorial", "Could not initialize Amplify", e);
         }
 
-        findViewById(R.id.settingButton).setOnClickListener(view1 -> {
-            Intent settings = new Intent(getBaseContext(), settings.class);
-            startActivity(settings);
-        });
 
-        findViewById(R.id.addButton).setOnClickListener(view -> {
-            Intent goToAddTask = new Intent(getBaseContext(), AddTask.class);
-            startActivity(goToAddTask);
 
-            findViewById(R.id.allTaskButton).setOnClickListener(view7 -> {
-                Intent goToALLTask = new Intent(getBaseContext(), AllTasks.class);
-                startActivity(goToALLTask);
+            setContentView(R.layout.activity_main);
+
+            RecyclerView taskRecyclerView = findViewById(R.id.tasksList);
+            taskList = new ArrayList<>();
+            taskList = amplifyData();
+            adapter = new TaskAdapter(taskList, new TaskAdapter.OnTaskItemClickListener() {
+
+                @Override
+                public void onItemClicked(int position) {
+                    Intent goToDetailsIntent = new Intent(getApplicationContext(), TaskDetails.class);
+                    goToDetailsIntent.putExtra(title, taskList.get(position).getTitle());
+                    goToDetailsIntent.putExtra(body, taskList.get(position).getBody());
+                    goToDetailsIntent.putExtra(state, taskList.get(position).getState());
+                    startActivity(goToDetailsIntent);
+                }
+
             });
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+                    this,
+                    LinearLayoutManager.VERTICAL,
+                    false);
 
+            taskRecyclerView.setLayoutManager(linearLayoutManager);
+            taskRecyclerView.setAdapter(adapter);
 
-
-
-            Amplify.API.query(
-                    ModelQuery.list(com.amplifyframework.datastore.generated.model.Task.class, com.amplifyframework.datastore.generated.model.Task.TITLE.ne("app")),
-                    response -> {
-                        amplifyTaskList = new ArrayList<>();
-                        for (com.amplifyframework.datastore.generated.model.Task task : response.getData()) {
-
-                            amplifyTaskList.add(task);
-                        }
-                        RecyclerView taskRecyclerView = findViewById(R.id.tasksList);
-                        taskRecyclerView.setAdapter(adapter);
-
-                        adapter = new  TaskAdapter(amplifyTaskList, position -> {
-                            Intent detailsIntent = new Intent(getApplicationContext(), TaskDetails.class);
-                            detailsIntent.putExtra("taskId", amplifyTaskList.get(position).getId());
-                            startActivity(detailsIntent);
-                        });
-
-
-
-
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
-                                getApplicationContext(),
-                                LinearLayoutManager.VERTICAL,
-                                true);
-                        runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-
-                                // Stuff that updates the UI
-                                taskRecyclerView.setLayoutManager(linearLayoutManager);
-                                taskRecyclerView.setAdapter(adapter);
-                            }
-                        });
-
-
-                    },
-                    error -> {
-                        Log.e("MyAmplifyApp", "Query failure", error);
-                        database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "TASK_LIST").allowMainThreadQueries().build();
-                        taskDao = database.taskDao();
-
-                        taskList = taskDao.findAll();
-                    }
-            );
-//
-//>>>>
-//        database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,TASK_LIST)
-//                .allowMainThreadQueries().build();
-//        taskDao = database.taskDao();
-//        taskList = taskDao.findAll();
-//
-//
-//
-//        RecyclerView taskRecyclerView = findViewById(R.id.tasksList);
-//        taskList = new ArrayList<>();
-//        taskList.add(new Task("Task 1", "study", "new"));
-//        taskList.add(new Task("Task 2", "eat", "assigned"));
-//        taskList.add(new Task("Task 3", "play", "in progress"));
-//        taskList.add(new Task("Task 4", "code", "complete"));
-//        taskList.add(new Task("Task 5", "watch tv", "new"));
-//        taskList.add(new Task("Task 6", "clean my room", "assigned"));
-
-//        adapter = new TaskAdapter(taskList, new TaskAdapter.OnTaskItemClickListener() {
-
-//            @Override
-//            public void onItemClicked(int position) {
-//                Intent goToDetailsIntent = new Intent(getApplicationContext(), TaskDetails.class);
-//                goToDetailsIntent.putExtra(title, taskList.get(position).getTitle());
-//                goToDetailsIntent.putExtra(body, taskList.get(position).getBody());
-//                goToDetailsIntent.putExtra(state, taskList.get(position).getState());
-//                startActivity(goToDetailsIntent);
-//            }
-
-//            @Override
-//            public void onDeleteItem(int position) {
-//
-//            }
-//        });
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
-//                this,
-//                LinearLayoutManager.VERTICAL,
-//                false);
-//
-//
-//      taskRecyclerView.setLayoutManager(linearLayoutManager);
-//        taskRecyclerView.setAdapter(adapter);
-//
-        Button settings = MainActivity.this.findViewById(R.id.settingButton);
-
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent settingsIntent = new Intent(MainActivity.this, settings.class);
-                startActivity(settingsIntent);
-            }
-        });
 
 
             Button addButton = findViewById(R.id.addButton);
@@ -207,44 +120,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            Button task1 = findViewById(R.id.button1);
-            task1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String title = task1.getText().toString();
-                    Intent detailsPage = new Intent(MainActivity.this, TaskDetails.class);
-                    detailsPage.putExtra("titleOfTasks", title);
-                    startActivity(detailsPage);
-
-                }
-            });
-
-
-            Button task2 = findViewById(R.id.button2);
-            task2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String title = task2.getText().toString();
-                    Intent detailsPage = new Intent(MainActivity.this, TaskDetails.class);
-                    detailsPage.putExtra("titleOfTasks", title);
-                    startActivity(detailsPage);
-
-                }
-            });
-
-
-            Button task3 = findViewById(R.id.detailButton);
-            task3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String title = task3.getText().toString();
-                    Intent detailsPage = new Intent(MainActivity.this, TaskDetails.class);
-                    detailsPage.putExtra("titleOfTasks", title);
-                    startActivity(detailsPage);
-
-                }
-            });
 
             Button settingsButton = findViewById(R.id.settingButton);
             settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -256,13 +131,40 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-        });
+
 
 
     }
+
+//    >>>>>>>>>>>>>>>> amplify <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    public static void  saveDataToAmplify(String title,String body ,String state){
+        com.amplifyframework.datastore.generated.model.Task item = com.amplifyframework.datastore.generated.model.Task.builder().title(title).body(body).state(state).build();
+
+        Amplify.DataStore.save(item,
+                success -> Log.i("Tutorial", "Saved item: " + success.item().toString()),
+                error -> Log.e("Tutorial", "Could not save item to DataStore", error)
+        );
+
+    }
+
+    public synchronized static List<Task> amplifyData(){
+        System.out.println("In get data");
+        List<Task> list = new ArrayList<>();
+        Amplify.DataStore.query(Task.class,tasks ->{
+                    while (tasks.hasNext()) {
+                        Task task = tasks.next();
+                        list.add(task);
+                        Log.i("Tutorial", "==== Task ====");
+                        Log.i("Tutorial", "TITLE : " + task.getTitle());
+                        Log.i("Tutorial", "BODY : " + task.getBody());
+                        Log.i("Tutorial", "STATE : " + task.getState());
+                        Log.i("Tutorial", "==== Task End ====");
+                    }
+                }, failure -> Log.e("Tutorial", "Could not query DataStore", failure)
+
+        );
+
+        return list;
+    }
+
 }
-
-
-
-
-

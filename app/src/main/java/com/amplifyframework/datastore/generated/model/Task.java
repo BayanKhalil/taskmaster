@@ -25,9 +25,9 @@ public final class Task implements Model {
   public static final QueryField BODY = field("Task", "body");
   public static final QueryField STATE = field("Task", "state");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="String", isRequired = true) String title;
+  private final @ModelField(targetType="String") String title;
   private final @ModelField(targetType="String") String body;
-    private final @ModelField(targetType="State", isRequired = true) String state;
+    private final @ModelField(targetType="String") String state;
 
     private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
@@ -178,7 +178,7 @@ public final class Task implements Model {
     }
     
     @Override
-     public BuildStep body(String description) {
+     public BuildStep body(String body) {
         this.body = body;
         return this;
     }
@@ -196,7 +196,7 @@ public final class Task implements Model {
      * @return Current Builder instance, for fluent method chaining
      * @throws IllegalArgumentException Checks that ID is in the proper format
      */
-    public BuildStep id(String id) throws IllegalArgumentException {
+    public BuildStep id(String id)  {
         this.id = id;
         
         try {
@@ -228,8 +228,8 @@ public final class Task implements Model {
     }
     
     @Override
-     public CopyOfBuilder body(String description) {
-      return (CopyOfBuilder) super.body(description);
+     public CopyOfBuilder body(String body) {
+      return (CopyOfBuilder) super.body(body);
 
     }
       @Override
