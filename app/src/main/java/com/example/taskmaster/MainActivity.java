@@ -1,9 +1,12 @@
 package com.example.taskmaster;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +17,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
- import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -75,70 +78,96 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
-            RecyclerView taskRecyclerView = findViewById(R.id.tasksList);
-            taskList = new ArrayList<>();
-            taskList = amplifyData();
-            adapter = new TaskAdapter(taskList, new TaskAdapter.OnTaskItemClickListener() {
+        RecyclerView taskRecyclerView = findViewById(R.id.tasksList);
+        taskList = new ArrayList<>();
+        taskList = amplifyData();
+        adapter = new TaskAdapter(taskList, new TaskAdapter.OnTaskItemClickListener() {
 
-                @Override
-                public void onItemClicked(int position) {
-                    Intent goToDetailsIntent = new Intent(getApplicationContext(), TaskDetails.class);
-                    goToDetailsIntent.putExtra(title, taskList.get(position).getTitle());
-                    goToDetailsIntent.putExtra(body, taskList.get(position).getBody());
-                    goToDetailsIntent.putExtra(state, taskList.get(position).getState());
-                    startActivity(goToDetailsIntent);
-                }
+            @Override
+            public void onItemClicked(int position) {
+                Intent goToDetailsIntent = new Intent(getApplicationContext(), TaskDetails.class);
+                goToDetailsIntent.putExtra(title, taskList.get(position).getTitle());
+                goToDetailsIntent.putExtra(body, taskList.get(position).getBody());
+                goToDetailsIntent.putExtra(state, taskList.get(position).getState());
+                startActivity(goToDetailsIntent);
+            }
 
-            });
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
-                    this,
-                    LinearLayoutManager.VERTICAL,
-                    false);
+        });
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+                this,
+                LinearLayoutManager.VERTICAL,
+                false);
 
-            taskRecyclerView.setLayoutManager(linearLayoutManager);
-            taskRecyclerView.setAdapter(adapter);
-
-
-
-            Button addButton = findViewById(R.id.addButton);
-            addButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent addButton = new Intent(MainActivity.this, AddTask.class);
-                    MainActivity.this.startActivity(addButton);
-                }
-            });
-
-            Button allTasksButton = findViewById(R.id.allTaskButton);
-            allTasksButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent allTasksButton = new Intent(MainActivity.this, AllTasks.class);
-                    MainActivity.this.startActivity(allTasksButton);
-                }
-            });
-
-
-            Button settingsButton = findViewById(R.id.settingButton);
-            settingsButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent settingPage = new Intent(MainActivity.this, settings.class);
-                    startActivity(settingPage);
-                }
-            });
+        taskRecyclerView.setLayoutManager(linearLayoutManager);
+        taskRecyclerView.setAdapter(adapter);
 
 
 
+        Button addButton = findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addButton = new Intent(MainActivity.this, AddTask.class);
+                MainActivity.this.startActivity(addButton);
+            }
+        });
+
+        Button allTasksButton = findViewById(R.id.allTaskButton);
+        allTasksButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent allTasksButton = new Intent(MainActivity.this, AllTasks.class);
+                MainActivity.this.startActivity(allTasksButton);
+            }
+        });
 
 
+        Button settingsButton = findViewById(R.id.settingButton);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent settingPage = new Intent(MainActivity.this, settings.class);
+                startActivity(settingPage);
+            }
+        });
+
+        Button  Logout = (Button) findViewById(R.id.buttonLogout);
+        Intent in = getIntent();
+        String string = in.getStringExtra("message");
+        Logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Confirmation PopUp!").
+                        setMessage("You sure, that you want to logout?");
+                builder.setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent i = new Intent(getApplicationContext(),
+                                        SignIn.class);
+                                startActivity(i);
+                            }
+                        });
+                builder.setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert11 = builder.create();
+                alert11.show();
+            }
+        });
     }
 
-//    >>>>>>>>>>>>>>>> amplify <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    public static void  saveDataToAmplify(String title,String body ,String state){
-        com.amplifyframework.datastore.generated.model.Task item = com.amplifyframework.datastore.generated.model.Task.builder().title(title).body(body).state(state).build();
+
+
+
+    //    >>>>>>>>>>>>>>>> amplify <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    public static void  saveDataToAmplify(String title,String body ,String state,String teamId){
+        com.amplifyframework.datastore.generated.model.Task item = com.amplifyframework.datastore.generated.model.Task.builder().title(title).state(state).teamId(teamId).body(body).build();
 
         Amplify.DataStore.save(item,
                 success -> Log.i("Tutorial", "Saved item: " + success.item().toString()),

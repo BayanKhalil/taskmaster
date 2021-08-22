@@ -38,29 +38,29 @@ public class AddTask extends AppCompatActivity {
 
 
 
-            Spinner spinner = findViewById(R.id.spinner);
-            // Create an ArrayAdapter using the string array and a default spinner layout
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                    R.array.stateArray, android.R.layout.simple_spinner_item);
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            // Apply the adapter to the spinner
-            spinner.setAdapter(adapter);
+        Spinner spinner = findViewById(R.id.spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.stateArray, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
 
 
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
 
-                    spinnerState = (String) adapterView.getItemAtPosition(position);
-                    System.out.println(spinnerState);
-                }
+                spinnerState = (String) adapterView.getItemAtPosition(position);
+                System.out.println(spinnerState);
+            }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                }
-            });
+            }
+        });
 
 
 
@@ -76,10 +76,11 @@ public class AddTask extends AppCompatActivity {
                 String title = inputTitle.getText().toString();
                 String description = inputDescription.getText().toString();
                 String taskStatus = spinnerState;
+                String teamId = "1";
 
 
 
-              MainActivity.saveDataToAmplify(title, description, taskStatus);
+                MainActivity.saveDataToAmplify(title, description, taskStatus,teamId);
                 Toast.makeText(getApplicationContext(), "Task Added", Toast.LENGTH_SHORT).show();
 
 
@@ -91,6 +92,4 @@ public class AddTask extends AppCompatActivity {
     }
 
 
-    }
-
-
+}
