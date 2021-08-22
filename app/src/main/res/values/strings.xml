@@ -29,6 +29,7 @@
     <string name="settings">Settings</string>
     <string name="add_task">ADD TASK</string>
     <string name="all_tasks">ALL TASKS</string>
+    <string name="team">Team</string>
 
 
     <string-array name="stateArray">
@@ -36,6 +37,13 @@
         <item>Assigned</item>
         <item>In Progress</item>
         <item>Completed</item>
+    </string-array>
+
+
+    <string-array name="TeamArray">
+        <item>Team 1</item>
+        <item>Team 2</item>
+        <item>Team 3</item>
     </string-array>
 
 </resources>

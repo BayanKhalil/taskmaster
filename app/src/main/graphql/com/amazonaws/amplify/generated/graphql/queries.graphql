@@ -1,26 +1,144 @@
 # this is an auto generated file. This will be overwritten
-query GetTodo($id: ID!) {
-  getTodo(id: $id) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-  }
-}
-query ListTodos(
-  $filter: ModelTodoFilterInput
+query SyncTasks(
+  $filter: ModelTaskFilterInput
   $limit: Int
   $nextToken: String
+  $lastSync: AWSTimestamp
 ) {
-  listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  syncTasks(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
     items {
       id
-      name
-      description
+      title
+      body
+      state
+      teamId
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
+    startedAt
+  }
+}
+query GetTask($id: ID!) {
+  getTask(id: $id) {
+    id
+    title
+    body
+    state
+    teamId
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+query ListTasks(
+  $filter: ModelTaskFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      body
+      state
+      teamId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncTeams(
+  $filter: ModelTeamFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncTeams(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      name
+      listOfTasks {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetTeam($id: ID!) {
+  getTeam(id: $id) {
+    id
+    name
+    listOfTasks {
+      items {
+        id
+        title
+        body
+        state
+        teamId
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+query ListTeams(
+  $filter: ModelTeamFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      listOfTasks {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
   }
 }

@@ -30,15 +30,6 @@ public class TaskDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_details);
 
-//        try {
-//            Amplify.addPlugin(new AWSDataStorePlugin());
-//            Amplify.addPlugin(new AWSApiPlugin());
-//            Amplify.configure(getApplicationContext());
-//
-//            Log.i("Tutorial", "Initialized Amplify");
-//        } catch (AmplifyException e) {
-//            Log.e("Tutorial", "Could not initialize Amplify", e);
-//        }
 
         Intent intent = getIntent();
         System.out.println(intent.getExtras().getString("titleOfTasks"));
@@ -59,6 +50,12 @@ public class TaskDetails extends AppCompatActivity {
         String state = getIntent().getStringExtra(MainActivity.state);
         TextView stateId = findViewById(R.id.stateFromList);
         stateId.setText(state);
+
+//        String team = getIntent().getStringExtra(MainActivity.team);
+//        TextView teamId = findViewById(R.id.teamFromList);
+//        teamId.setText(team);
+
+
 //        database = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "TASK_LIST").allowMainThreadQueries().build();
 //        taskDao = database.taskDao();
 
