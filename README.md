@@ -59,3 +59,15 @@ Update all references to the Task data to instead use AWS Amplify to access your
 Then refactor the pages
 
 * i started the code with saed jabali
+
+
+### lab36
+
+my app will allow users to sign up and log in and log out using Cognito
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/signOut.jpg" alt="1" width="200"/>
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/signIn.jpg" alt="2" width="200"/>
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/log%20out.jpg" alt="3" width="200"/>
+
