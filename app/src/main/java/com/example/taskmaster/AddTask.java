@@ -17,8 +17,14 @@ import android.widget.Toast;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
+import com.amplifyframework.datastore.generated.model.Team;
+import com.amplifyframework.datastore.generated.model.Task;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddTask extends AppCompatActivity {
 
@@ -62,7 +68,36 @@ public class AddTask extends AppCompatActivity {
             }
         });
 
+//      >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>3333333<<<<<<<<<<<<<<<<<<<<<<
 
+        Spinner teamSpinner = findViewById(R.id.task_team_spinner);
+        List<String> teamNameList = new ArrayList<>();
+        List<Team> teamList = new ArrayList<>();
+        Amplify.API.query(ModelQuery.list(Team.class),
+                response -> {
+
+                    Team team1 = Team.builder().name("Team1").build();
+                    Team team2 = Team.builder().name("Team2").build();
+                    Team team3 = Team.builder().name("Team3").build();
+
+//
+                        teamNameList.add(team1.getName());
+                        teamNameList.add(team2.getName());
+                        teamNameList.add(team3.getName());
+                        teamList.add(team1);
+                        teamList.add(team2);
+                        teamList.add(team3);
+
+                    ArrayAdapter<String> teamSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, teamNameList);
+                    runOnUiThread(() -> {
+                        teamSpinner.setAdapter(teamSpinnerAdapter);
+                    });
+
+                },
+                error -> {
+                    Log.e("TEAM_ERROR", "onCreate: ", error);
+                });
+//        <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<33333>>>>>>>>>>>>>>>>>>>>>>>>
 
         Button InAddTAsk=findViewById(R.id.button3);
         InAddTAsk.setOnClickListener(new View.OnClickListener() {
@@ -76,20 +111,38 @@ public class AddTask extends AppCompatActivity {
                 String title = inputTitle.getText().toString();
                 String description = inputDescription.getText().toString();
                 String taskStatus = spinnerState;
-                String teamId = "1";
+                String taskTeam = ((Spinner) findViewById(R.id.task_team_spinner)).getSelectedItem().toString();
+                String teamId = "";
+                String teamName = "";
+                for (Team team: teamList) {
+                    if (team.getName().equals(taskTeam)){
+                        teamId = team.getId();
+//                        teamName = team.getName();
+                    }
+                }
 
-
+                Task task = Task.builder().title(title).state(taskStatus).teamId(teamId).body(description).build();
 
                 MainActivity.saveDataToAmplify(title, description, taskStatus,teamId);
-                Toast.makeText(getApplicationContext(), "Task Added", Toast.LENGTH_SHORT).show();
 
+                Amplify.API.mutate(ModelMutation.create(task),
+                        response -> {
+                            Log.i("app", "task  " + response.getData().getId());
+//                            taskDao.addTask(task);
+                        },
+                        error -> Log.e("add task", "Create failed", error)
+                );
+
+                Toast.makeText(getBaseContext(), "Task was added", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
             }
 
-        });
+
+
 
     }
 
 
-}

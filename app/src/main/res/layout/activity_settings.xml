@@ -4,60 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settings">
+    tools:context=".settings"
+    tools:ignore="ExtraText">
+
 
     <EditText
         android:id="@+id/userName"
         android:layout_width="251dp"
         android:layout_height="0dp"
         android:layout_marginTop="87dp"
-        android:layout_marginBottom="96dp"
+        android:layout_marginBottom="77dp"
         android:text="username"
         android:textSize="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/TeamSpinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.211"
+        app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 
     <Button
         android:id="@+id/saveNameButton"
         android:layout_width="112dp"
         android:layout_height="54dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="232dp"
         android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
-        app:layout_constraintVertical_bias="0.553" />
-
+        app:layout_constraintTop_toBottomOf="@+id/userName" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="66dp"
-        android:layout_marginEnd="59dp"
+        android:layout_marginEnd="27dp"
         android:layout_marginBottom="313dp"
         android:text="@string/team"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/TeamSpinner"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName" />
+        app:layout_constraintTop_toBottomOf="@+id/userName"
+        app:layout_constraintVertical_bias="0.745" />
+
+    app:layout_constraintStart_toEndOf="@+id/textView"
+    tools:layout_editor_absoluteY="208dp" />
 
     <Spinner
         android:id="@+id/TeamSpinner"
         android:layout_width="0dp"
-        android:layout_height="28dp"
-        android:layout_marginEnd="158dp"
+        android:layout_height="0dp"
+
+        android:layout_marginEnd="126dp"
+        android:layout_marginBottom="337dp"
         android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/userName" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
