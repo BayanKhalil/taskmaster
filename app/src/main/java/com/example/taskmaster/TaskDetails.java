@@ -51,9 +51,9 @@ public class TaskDetails extends AppCompatActivity {
         TextView stateId = findViewById(R.id.stateFromList);
         stateId.setText(state);
 
-//        String team = getIntent().getStringExtra(MainActivity.team);
-//        TextView teamId = findViewById(R.id.teamFromList);
-//        teamId.setText(team);
+        String team = getIntent().getStringExtra(MainActivity.teamId);
+        TextView teamId = findViewById(R.id.teamFromList);
+        teamId.setText(team);
 
 
 //        database = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "TASK_LIST").allowMainThreadQueries().build();

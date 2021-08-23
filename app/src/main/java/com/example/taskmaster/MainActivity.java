@@ -23,6 +23,7 @@ import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
+import com.amplifyframework.datastore.generated.model.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
     public static final String title = "title";
     public static final String body = "body";
     public static final String state = "state";
+    public static final String teamId = "teamId";
 
 
+    protected List<Task> taskListAmp = new ArrayList<>();
 
     private List<Task> taskList;
     private TaskAdapter adapter;
@@ -54,7 +57,11 @@ public class MainActivity extends AppCompatActivity {
         TextView title = findViewById(R.id.homePageTitle);
         title.setText(userName + "'s Tasks");
 
-        amplifyData();
+        ((TextView) findViewById(R.id.homePageTeam)).setText(preferences.getString("teamName", "All Task"));
+//        String teamId = preferences.getString("teamId", "");
+
+
+            amplifyData();
 
 
     }
@@ -64,18 +71,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        try {
-            Amplify.addPlugin(new AWSDataStorePlugin());
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.configure(getApplicationContext());
-
-            Log.i("Tutorial", "Initialized Amplify");
-        } catch (AmplifyException e) {
-            Log.e("Tutorial", "Could not initialize Amplify", e);
-        }
-
 
 
         setContentView(R.layout.activity_main);
@@ -91,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 goToDetailsIntent.putExtra(title, taskList.get(position).getTitle());
                 goToDetailsIntent.putExtra(body, taskList.get(position).getBody());
                 goToDetailsIntent.putExtra(state, taskList.get(position).getState());
+                goToDetailsIntent.putExtra(teamId, taskList.get(position).getTeamId());
                 startActivity(goToDetailsIntent);
             }
 
@@ -163,9 +159,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-    //    >>>>>>>>>>>>>>>> amplify <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//       >>>>>>>>>>>>>>>> amplify <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     public static void  saveDataToAmplify(String title,String body ,String state,String teamId){
         com.amplifyframework.datastore.generated.model.Task item = com.amplifyframework.datastore.generated.model.Task.builder().title(title).state(state).teamId(teamId).body(body).build();
 
@@ -187,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("Tutorial", "TITLE : " + task.getTitle());
                         Log.i("Tutorial", "BODY : " + task.getBody());
                         Log.i("Tutorial", "STATE : " + task.getState());
+                        Log.i("Tutorial", "ID : " + task.getTeamId());
                         Log.i("Tutorial", "==== Task End ====");
                     }
                 }, failure -> Log.e("Tutorial", "Could not query DataStore", failure)
