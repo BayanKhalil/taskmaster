@@ -60,6 +60,16 @@ Then refactor the pages
 
 * i started the code with saed jabali
 
+### lab33
+
+add Team to task
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/lab33%20setting.jpg" alt="1" width="200"/>
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/lab33%20add.jpg" alt="2" width="200"/>
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/home.jpg" alt="3" width="200"/>
+
 
 ### lab36
 
