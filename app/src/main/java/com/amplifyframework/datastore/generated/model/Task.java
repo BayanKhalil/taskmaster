@@ -25,11 +25,13 @@ public final class Task implements Model {
   public static final QueryField TITLE = field("Task", "title");
   public static final QueryField BODY = field("Task", "body");
   public static final QueryField STATE = field("Task", "state");
+  public static final QueryField UPLOADED_FILE = field("Task", "uploadedFile");
   public static final QueryField TEAM_ID = field("Task", "teamId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String title;
   private final @ModelField(targetType="String") String body;
   private final @ModelField(targetType="String", isRequired = true) String state;
+  private final @ModelField(targetType="String") String uploadedFile;
   private final @ModelField(targetType="ID", isRequired = true) String teamId;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
@@ -49,6 +51,10 @@ public final class Task implements Model {
       return state;
   }
   
+  public String getUploadedFile() {
+      return uploadedFile;
+  }
+  
   public String getTeamId() {
       return teamId;
   }
@@ -61,11 +67,12 @@ public final class Task implements Model {
       return updatedAt;
   }
   
-  private Task(String id, String title, String body, String state, String teamId) {
+  private Task(String id, String title, String body, String state, String uploadedFile, String teamId) {
     this.id = id;
     this.title = title;
     this.body = body;
     this.state = state;
+    this.uploadedFile = uploadedFile;
     this.teamId = teamId;
   }
   
@@ -81,6 +88,7 @@ public final class Task implements Model {
               ObjectsCompat.equals(getTitle(), task.getTitle()) &&
               ObjectsCompat.equals(getBody(), task.getBody()) &&
               ObjectsCompat.equals(getState(), task.getState()) &&
+              ObjectsCompat.equals(getUploadedFile(), task.getUploadedFile()) &&
               ObjectsCompat.equals(getTeamId(), task.getTeamId()) &&
               ObjectsCompat.equals(getCreatedAt(), task.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), task.getUpdatedAt());
@@ -94,6 +102,7 @@ public final class Task implements Model {
       .append(getTitle())
       .append(getBody())
       .append(getState())
+      .append(getUploadedFile())
       .append(getTeamId())
       .append(getCreatedAt())
       .append(getUpdatedAt())
@@ -109,6 +118,7 @@ public final class Task implements Model {
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
       .append("state=" + String.valueOf(getState()) + ", ")
+      .append("uploadedFile=" + String.valueOf(getUploadedFile()) + ", ")
       .append("teamId=" + String.valueOf(getTeamId()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
@@ -144,6 +154,7 @@ public final class Task implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -153,6 +164,7 @@ public final class Task implements Model {
       title,
       body,
       state,
+      uploadedFile,
       teamId);
   }
   public interface TitleStep {
@@ -174,6 +186,7 @@ public final class Task implements Model {
     Task build();
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep body(String body);
+    BuildStep uploadedFile(String uploadedFile);
   }
   
 
@@ -183,6 +196,7 @@ public final class Task implements Model {
     private String state;
     private String teamId;
     private String body;
+    private String uploadedFile;
     @Override
      public Task build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -192,6 +206,7 @@ public final class Task implements Model {
           title,
           body,
           state,
+          uploadedFile,
           teamId);
     }
     
@@ -222,6 +237,12 @@ public final class Task implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep uploadedFile(String uploadedFile) {
+        this.uploadedFile = uploadedFile;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -245,12 +266,13 @@ public final class Task implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String title, String body, String state, String teamId) {
+    private CopyOfBuilder(String id, String title, String body, String state, String uploadedFile, String teamId) {
       super.id(id);
       super.title(title)
         .state(state)
         .teamId(teamId)
-        .body(body);
+        .body(body)
+        .uploadedFile(uploadedFile);
     }
     
     @Override
@@ -271,6 +293,11 @@ public final class Task implements Model {
     @Override
      public CopyOfBuilder body(String body) {
       return (CopyOfBuilder) super.body(body);
+    }
+    
+    @Override
+     public CopyOfBuilder uploadedFile(String uploadedFile) {
+      return (CopyOfBuilder) super.uploadedFile(uploadedFile);
     }
   }
   

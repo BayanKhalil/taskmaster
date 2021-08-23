@@ -17,8 +17,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
-
-import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
@@ -64,9 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
 
             amplifyData();
-
-
-
 
 
     }

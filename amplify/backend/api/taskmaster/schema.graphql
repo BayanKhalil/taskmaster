@@ -6,6 +6,7 @@ type Task
   title: String!
   body: String
   state: String!
+  uploadedFile: String
   teamId: ID!
 }
 
