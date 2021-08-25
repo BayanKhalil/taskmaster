@@ -81,3 +81,13 @@ my app will allow users to sign up and log in and log out using Cognito
 
 <img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/log%20out.jpg" alt="3" width="200"/>
 
+
+### lab37
+
+ allow users to optionally select a file to attach to that task. If a user attaches a file to a task, that file should be uploaded to S3, and associated with that task.
+ 
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/37%20add.jpg" alt="1" width="200"/>
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/37%20details.jpg" alt="2" width="200"/>
+
+
