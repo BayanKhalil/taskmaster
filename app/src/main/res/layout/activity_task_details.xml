@@ -46,12 +46,11 @@
         app:layout_constraintTop_toBottomOf="@+id/titleOfTaskFromList"
         app:layout_constraintVertical_bias="0.033" />
 
-    <MultiAutoCompleteTextView
-        android:id="@+id/lorenIbsumBody"
+    <ImageView
+        android:id="@+id/taskImageDetail"
         android:layout_width="210dp"
         android:layout_height="220dp"
-        android:fontFamily="sans-serif-light"
-        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+        android:text="taskImageview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -60,29 +59,44 @@
         app:layout_constraintVertical_bias="0.28" />
 
     <TextView
+        android:id="@+id/fileLinkDetail"
+        android:layout_width="354dp"
+        android:layout_height="125dp"
+        android:text="fileLink"
+        android:textColor="@color/purple_200"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.933" />
+
+    <TextView
         android:id="@+id/stateFromList"
-        android:layout_width="186dp"
-        android:layout_height="67dp"
+        android:layout_width="134dp"
+        android:layout_height="58dp"
         android:text="Task State"
         android:textColor="@color/purple_200"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.888"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.792" />
+        app:layout_constraintVertical_bias="0.658" />
 
     <TextView
         android:id="@+id/teamFromList"
-        android:layout_width="186dp"
-        android:layout_height="67dp"
-        android:layout_marginBottom="28dp"
+        android:layout_width="166dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="192dp"
         android:text="Task Team"
         android:textColor="@color/purple_200"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
