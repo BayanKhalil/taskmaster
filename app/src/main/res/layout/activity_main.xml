@@ -121,14 +121,7 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/addButton"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:text="upload"
-        app:layout_constraintStart_toStartOf="@+id/settingButton"
-        app:layout_constraintTop_toBottomOf="@+id/settingButton" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,17 +1,24 @@
 package com.example.taskmaster;
 
 import androidx.annotation.NonNull;
+
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class TaskAdapter  extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
+    Context context;
 
 //    private final List<Task> tasks;
     private final List<com.amplifyframework.datastore.generated.model.Task> amplifyTasks;
@@ -42,6 +49,7 @@ public class TaskAdapter  extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
         holder.title.setText(amplifyItem.getTitle());
         holder.body.setText(amplifyItem.getBody());
         holder.state.setText(amplifyItem.getState());
+
     }
 
     @Override
@@ -55,12 +63,14 @@ public class TaskAdapter  extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
         private TextView body;
         private TextView state;
 
+
         ViewHolder(@NonNull View itemView, OnTaskItemClickListener listener) {
             super(itemView);
 
             title = itemView.findViewById(R.id.task_title);
             body = itemView.findViewById(R.id.task_body);
             state = itemView.findViewById(R.id.task_state);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

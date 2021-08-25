@@ -31,6 +31,8 @@
     <string name="all_tasks">ALL TASKS</string>
     <string name="team">Team</string>
     <string name="upload" />
+    <string name="taskimage">taskImage</string>
+    <string name="taskImage" />
 
 
     <string-array name="stateArray">
