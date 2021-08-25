@@ -41,9 +41,7 @@ public class Task {
     public String getTitle() {
         return title;
     }
-    public String setTitle() {
-        return title;
-    }
+
 
     public String getBody() {
         return body;

@@ -10,7 +10,7 @@
         android:id="@+id/titleOfTaskFromList"
         android:layout_width="186dp"
         android:layout_height="67dp"
-        android:text="Task Detail"
+        android:text="@string/task_detail"
         android:textColor="@color/purple_200"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,7 +24,7 @@
         android:id="@+id/titleOfTask"
         android:layout_width="186dp"
         android:layout_height="67dp"
-        android:text="Task Detail"
+        android:text="@string/task_detail"
         android:textColor="@color/purple_200"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,25 +44,28 @@
         app:layout_constraintHorizontal_bias="0.242"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleOfTaskFromList"
-        app:layout_constraintVertical_bias="0.033" />
+        app:layout_constraintVertical_bias="0.033"
+        tools:ignore="LabelFor" />
 
     <ImageView
         android:id="@+id/taskImageDetail"
         android:layout_width="210dp"
         android:layout_height="220dp"
-        android:text="taskImageview"
+        android:text="@string/taskimageview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleOfTaskFromList"
-        app:layout_constraintVertical_bias="0.28" />
+        app:layout_constraintVertical_bias="0.28"
+        android:contentDescription="@string/img" />
+
 
     <TextView
         android:id="@+id/fileLinkDetail"
         android:layout_width="354dp"
         android:layout_height="125dp"
-        android:text="fileLink"
+        android:text="@string/filelink"
         android:textColor="@color/purple_200"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -76,7 +79,7 @@
         android:id="@+id/stateFromList"
         android:layout_width="134dp"
         android:layout_height="58dp"
-        android:text="Task State"
+        android:text="@string/task_state"
         android:textColor="@color/purple_200"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,7 +94,7 @@
         android:layout_width="166dp"
         android:layout_height="53dp"
         android:layout_marginBottom="192dp"
-        android:text="Task Team"
+        android:text="@string/task_team"
         android:textColor="@color/purple_200"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"

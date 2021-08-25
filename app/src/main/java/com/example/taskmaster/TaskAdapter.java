@@ -2,27 +2,23 @@ package com.example.taskmaster;
 
 import androidx.annotation.NonNull;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
+
 
 import java.util.List;
 
 public class TaskAdapter  extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
-    Context context;
 
 //    private final List<Task> tasks;
     private final List<com.amplifyframework.datastore.generated.model.Task> amplifyTasks;
-    private OnTaskItemClickListener listener;
+    private final OnTaskItemClickListener listener;
 
     public interface OnTaskItemClickListener {
         void onItemClicked(int position);
@@ -59,9 +55,9 @@ public class TaskAdapter  extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView title;
-        private TextView body;
-        private TextView state;
+        private final TextView title;
+        private final TextView body;
+        private final TextView state;
 
 
         ViewHolder(@NonNull View itemView, OnTaskItemClickListener listener) {
@@ -72,13 +68,7 @@ public class TaskAdapter  extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
             state = itemView.findViewById(R.id.task_state);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    listener.onItemClicked(getAdapterPosition());
-                }
-            });
+            itemView.setOnClickListener(v -> listener.onItemClicked(getAdapterPosition()));
 
         }
     }

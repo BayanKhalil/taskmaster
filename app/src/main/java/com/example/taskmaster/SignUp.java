@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -29,15 +28,10 @@ public class SignUp extends AppCompatActivity {
         EditText email = findViewById(R.id.etemail);
         EditText password = findViewById(R.id.mypass);
 
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signUp(
-                        username.getText().toString(),
-                        email.getText().toString(),
-                        password.getText().toString());
-            }
-        });
+        signUp.setOnClickListener(view -> signUp(
+                username.getText().toString(),
+                email.getText().toString(),
+                password.getText().toString()));
     }
 
     void signUp(String username, String email, String password) {
@@ -54,9 +48,7 @@ public class SignUp extends AppCompatActivity {
                     goToVerification.putExtra("password", password);
                     startActivity(goToVerification);
                 },
-                error -> {
-                    Log.e(TAG, "signUp failed: " + error.toString());
-                });
+                error -> Log.e(TAG, "signUp failed: " + error.toString()));
     }
 
 //    private void configureAmplify() {

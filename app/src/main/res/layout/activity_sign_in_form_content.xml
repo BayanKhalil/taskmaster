@@ -13,26 +13,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Username"
+            android:hint="@string/Username"
 
             android:inputType="textEmailAddress"
-            />
+            android:autofillHints="email" />
 
         <EditText
             android:id="@+id/mypass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
-            />
+            android:autofillHints="passWord" />
         <Button
             android:id="@+id/btnlogin"
             android:textAllCaps="false"
             android:layout_marginTop="10dp"
             android:textColor="@color/colorWhite"
             android:background="@drawable/botton_shape"
-            android:text="Sign In"
+            android:text="@string/sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
@@ -42,7 +42,7 @@
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"
             android:layout_gravity="center"
-            android:text="Create a new Acount!"
+            android:text="@string/create_a_new_acount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.taskmaster;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -16,7 +17,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.os.FileUtils;
 import android.util.Log;
@@ -36,10 +36,8 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Team;
 import com.amplifyframework.datastore.generated.model.Task;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -50,11 +48,9 @@ import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.Q)
 public class AddTask extends AppCompatActivity {
 
-    private static final int REQUEST_FOR_FILE = 999;
-    private static final String TAG = "ADD TASK";
+//    private static final String TAG = "ADD TASK";
     private String spinnerState;
-    private AppDatabase database;
-    private TaskDao taskDao;
+//    private TaskDao taskDao;
 
     private String uploadFileName;
 
@@ -96,7 +92,7 @@ public class AddTask extends AppCompatActivity {
 
 //      >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>3333333<<<<<<<<<<<<<<<<<<<<<<
 
-        Spinner teamSpinner = findViewById(R.id.task_team_spinner);
+        @SuppressLint("CutPasteId") Spinner teamSpinner = findViewById(R.id.task_team_spinner);
         List<String> teamNameList = new ArrayList<>();
         List<Team> teamList = new ArrayList<>();
         Amplify.API.query(ModelQuery.list(Team.class),
@@ -115,66 +111,55 @@ public class AddTask extends AppCompatActivity {
                         teamList.add(team3);
 
                     ArrayAdapter<String> teamSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, teamNameList);
-                    runOnUiThread(() -> {
-                        teamSpinner.setAdapter(teamSpinnerAdapter);
-                    });
+                    runOnUiThread(() -> teamSpinner.setAdapter(teamSpinnerAdapter));
 
                 },
-                error -> {
-                    Log.e("ERROR", "onCreate: ", error);
-                });
+                error -> Log.e("ERROR", "onCreate: ", error));
 //        <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<33333>>>>>>>>>>>>>>>>>>>>>>>>
 
         Button InAddTAsk=findViewById(R.id.button3);
-        InAddTAsk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        InAddTAsk.setOnClickListener(v -> {
 
-                EditText inputTitle = findViewById(R.id.editText);
-                EditText inputDescription = findViewById(R.id.editTextDescription);
+            EditText inputTitle = findViewById(R.id.editText);
+            EditText inputDescription = findViewById(R.id.editTextDescription);
 
 
-                String title = inputTitle.getText().toString();
-                String description = inputDescription.getText().toString();
-                String taskStatus = spinnerState;
-                String taskTeam = ((Spinner) findViewById(R.id.task_team_spinner)).getSelectedItem().toString();
-                String teamId = "";
-                String teamName = "";
-                for (Team team: teamList) {
-                    if (team.getName().equals(taskTeam)){
-                        teamId = team.getId();
+            String title = inputTitle.getText().toString();
+            String description = inputDescription.getText().toString();
+            String taskStatus = spinnerState;
+            @SuppressLint("CutPasteId") String taskTeam = ((Spinner) findViewById(R.id.task_team_spinner)).getSelectedItem().toString();
+            String teamId = "";
+            for (Team team: teamList) {
+                if (team.getName().equals(taskTeam)){
+                    teamId = team.getId();
 //                        teamName = team.getName();
-                    }
                 }
+            }
 
-                String fileName = uploadFileName ;
+            String fileName = uploadFileName ;
 
-                Task task = Task.builder().title(title).state(taskStatus).teamId(teamId).body(description).uploadedFile(fileName).build();
+            Task task = Task.builder().title(title).state(taskStatus).teamId(teamId).body(description).uploadedFile(fileName).build();
 
 
-                MainActivity.saveDataToAmplify(title, description, taskStatus,teamId,fileName);
+            MainActivity.saveDataToAmplify(title, description, taskStatus,teamId,fileName);
 
-                Amplify.API.mutate(ModelMutation.create(task),
-                        response -> {
-                            Log.i("app", "task  " + response.getData().getId());
+            Amplify.API.mutate(ModelMutation.create(task),
+                    response -> {
+                        Log.i("app", "task  " + response.getData().getId());
 //                            taskDao.addTask(task);
 
-                        },
-                        error -> Log.e("add task", "Create failed", error)
-                );
+                    },
+                    error -> Log.e("add task", "Create failed", error)
+            );
 
-                Toast.makeText(getBaseContext(), "Task was added", Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(getBaseContext(), "Task was added", Toast.LENGTH_SHORT).show();
         });
 
 
         Button pickFileButton = findViewById(R.id.upload);
-        pickFileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFileFromDevice();
-                Toast.makeText(AddTask.this, "", Toast.LENGTH_SHORT).show();
-            }
+        pickFileButton.setOnClickListener(v -> {
+            getFileFromDevice();
+            Toast.makeText(AddTask.this, "", Toast.LENGTH_SHORT).show();
         });
 
 
@@ -183,8 +168,8 @@ public class AddTask extends AppCompatActivity {
 
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.37--S3------<<<<<<<<<<<<<<
-@RequiresApi(api = Build.VERSION_CODES.Q)
-private void activityResult(ActivityResult activityResult) throws IOException {
+  @RequiresApi(api = Build.VERSION_CODES.Q)
+  private void activityResult(ActivityResult activityResult) throws IOException {
 
     Uri uri = null;
     if (activityResult.getData() != null) {
@@ -253,18 +238,18 @@ private void activityResult(ActivityResult activityResult) throws IOException {
 
 
 
-    private void uploadFileToS3() {
-        File testFile = new File(getApplicationContext().getFilesDir(), "test");
-
-        try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(testFile));
-            bufferedWriter.append("This is a test file to demonstrate S3 functionality");
-            bufferedWriter.close();
-        } catch (Exception exception) {
-            Log.e(TAG, "uploadFileToS3: failed" + exception.toString());
-        }
-
-    }
+//    private void uploadFileToS3() {
+//        File testFile = new File(getApplicationContext().getFilesDir(), "test");
+//
+//        try {
+//            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(testFile));
+//            bufferedWriter.append("This is a test file to demonstrate S3 functionality");
+//            bufferedWriter.close();
+//        } catch (Exception exception) {
+//            Log.e(TAG, "uploadFileToS3: failed" + exception.toString());
+//        }
+//
+//    }
     }
 
 

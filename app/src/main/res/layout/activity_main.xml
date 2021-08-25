@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="3dp"
-        android:text="Logout"
+        android:text="@string/logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/homePageTitle"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
         android:layout_marginTop="20dp"
-        android:text="All Tasks"
+        android:text="@string/all_Tasks"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homePageTitle" />
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginBottom="12dp"
-        android:text="Task1"
+        android:text="@string/Task1"
         app:layout_constraintBottom_toTopOf="@+id/settingButton"
         app:layout_constraintStart_toStartOf="parent" />
 

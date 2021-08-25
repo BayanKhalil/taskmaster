@@ -15,7 +15,6 @@ public class Verification extends AppCompatActivity {
 
     private static final String TAG = "Verification";
     private String username;
-    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class Verification extends AppCompatActivity {
 
         Intent intent = getIntent();
         username = intent.getExtras().getString("username", "");
-        password = intent.getExtras().getString("password", "");
+//        String password = intent.getExtras().getString("password", "");
 
         verify.setOnClickListener(view -> verification(username, editText.getText().toString()));
     }
@@ -44,18 +43,16 @@ public class Verification extends AppCompatActivity {
 
 //                    silentSignIn(username, password);
                 },
-                error -> {
-                    Log.e(TAG, "verification: failed" + error.toString());
-                });
+                error -> Log.e(TAG, "verification: failed" + error.toString()));
     }
 
-    void silentSignIn(String username, String password) {
-        Amplify.Auth.signIn(
-                username,
-                password,
-                success -> {
-                    Log.i(TAG, "signIn: worked " + success.toString());
-                },
-                error -> Log.e(TAG, "signIn: failed" + error.toString()));
-    }
+//    void silentSignIn(String username, String password) {
+//        Amplify.Auth.signIn(
+//                username,
+//                password,
+//                success -> {
+//                    Log.i(TAG, "signIn: worked " + success.toString());
+//                },
+//                error -> Log.e(TAG, "signIn: failed" + error.toString()));
+//    }
 }
