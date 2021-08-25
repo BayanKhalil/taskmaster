@@ -3,11 +3,10 @@ package com.example.taskmaster;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 
-import android.net.Uri;
+
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,21 +16,17 @@ import android.widget.TextView;
 
 
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.Task;
+
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.util.List;
+
 
 
 public class TaskDetails extends AppCompatActivity {
 
     private static final String TAG = "taskDetails";
-    private List<Task> taskList;
-    private TaskAdapter adapter;
-    private TaskDao taskDao;
-    private AppDatabase database;
-    private String fileURL;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,9 +92,7 @@ public class TaskDetails extends AppCompatActivity {
         Amplify.Storage.downloadFile(
                 key,
                 new File(getApplicationContext().getFilesDir() + key),
-                result -> {
-                    Log.i(TAG, "Successfully downloaded: " + result.getFile().getAbsoluteFile());
-                },
+                result -> Log.i(TAG, "Successfully downloaded: " + result.getFile().getAbsoluteFile()),
                 error -> Log.e(TAG, "Download Failure", error)
         );
     }

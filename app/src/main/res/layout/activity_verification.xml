@@ -18,14 +18,16 @@
             android:id="@+id/confirmationCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="verification code" />
+            android:hint="@string/verification_code"
+            android:autofillHints="code"
+             />
 
         <Button
             android:id="@+id/verify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/botton_shape"
-            android:text="Verify"
+            android:text="@string/verify"
             android:textColor="@color/white" />
     </LinearLayout>
 

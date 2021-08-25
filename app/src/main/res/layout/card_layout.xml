@@ -59,7 +59,8 @@
             android:layout_marginTop="13dp"
             android:layout_marginEnd="101dp"
             android:layout_toEndOf="@+id/task_body"
-            android:text="taskImageview" />
+            android:text="@string/taskimageview"
+            android:contentDescription="@string/taskimg" />
 
         <!--        <TextView-->
 <!--            android:id="@+id/task_team"-->

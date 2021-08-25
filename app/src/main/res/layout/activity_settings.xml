@@ -14,13 +14,15 @@
         android:layout_height="0dp"
         android:layout_marginTop="87dp"
         android:layout_marginBottom="77dp"
-        android:text="username"
-        android:textSize="25dp"
+        android:text="@string/username"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/TeamSpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints=""
+        />
 
 
 
@@ -29,7 +31,7 @@
         android:layout_width="112dp"
         android:layout_height="54dp"
         android:layout_marginTop="232dp"
-        android:text="Save"
+        android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toStartOf="parent"
