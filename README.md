@@ -95,7 +95,7 @@ my app will allow users to sign up and log in and log out using Cognito
 
 add the ability for push notifications to be delivered to my app from the cloud
 
-<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/notification.png" alt="1" width="200"/>
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/notification.png" alt="1" width="800"/>
 
 <img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/38%20notification.jpg" alt="2" width="200"/>
 
