@@ -100,3 +100,15 @@ add the ability for push notifications to be delivered to my app from the cloud
 <img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/38%20notification.jpg" alt="2" width="200"/>
 
 
+### lab39
+
+Add Analytics to my amplify project.
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/analytics1.png" alt="1" width="800"/>
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/analytics2.png" alt="2" width="800"/>
+
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/analytics3.png" alt="2" width="600"/><img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/analytics4.jpg" alt="2" width="200"/>
+
+
+
