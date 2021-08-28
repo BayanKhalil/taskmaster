@@ -108,7 +108,7 @@ Add Analytics to my amplify project.
 
 <img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/analytics2.png" alt="2" width="800"/>
 
-<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/analytics3.png" alt="2" width="600"/><img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/analytics4.jpg" alt="2" width="200"/>
+<img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/analytics3.png" alt="2" width="400"/><img src="https://github.com/BayanKhalil/taskmaster/blob/main/screenshots/analytics4.jpg" alt="2" width="200"/>
 
 
 
